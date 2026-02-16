@@ -1,4 +1,4 @@
-# Our FEH II Robotics Project Repo
+# FEH II Robotics Project Repo
 
 ## Contributors
 - Carter Russell
