@@ -1,8 +1,4 @@
-#include "drivetrain.cpp"
-#include <FEHLCD.h>
-#include <FEHIO.h>
-#include <FEHMotor.h>
-
+#include "../include/drivetrain.h"
 
 // declarations for encoders & motors
 DigitalEncoder right_encoder(FEHIO::Pin8);
