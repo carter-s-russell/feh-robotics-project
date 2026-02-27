@@ -65,12 +65,12 @@ public:
     void driveInDirection(int inches, double angle, int percent);
 
     /**
-     * @brief Halts power to both the right and left motors
+     * @brief Stops power to both the right and left motors
      */
     void stopMotors();
 
     /**
-     * @brief Sets the immediate power percentage for both motors
+     * @brief Sets the  power percentage for both motors
      * 
      * @param right The power percentage for the right motor (-100 to 100)
      * @param left The power percentage for the left motor (-100 to 100)

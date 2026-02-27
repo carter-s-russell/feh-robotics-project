@@ -1,5 +1,6 @@
 #include "../include/drivetrain.h"
 
+// constructor
 Drivetrain::Drivetrain(FEHMotor::FEHMotorPort rightMotorPort, FEHMotor::FEHMotorPort leftMotorPort, 
                        FEHIO::FEHIOPin rightEncoderPin, FEHIO::FEHIOPin leftEncoderPin)
     : rightMotor(rightMotorPort, MAX_VOLTAGE), 
@@ -8,6 +9,7 @@ Drivetrain::Drivetrain(FEHMotor::FEHMotorPort rightMotorPort, FEHMotor::FEHMotor
       leftEncoder(leftEncoderPin) 
 {}
 
+// public functions
 void Drivetrain::driveForward(int inches, int percent) {
     int counts = ceil(inches * COUNTS_PER_INCH);
 
@@ -36,11 +38,6 @@ void Drivetrain::driveInDirection(int inches, double angle, int percent) {
     
 }
 
-void Drivetrain::resetCounts() {
-    rightEncoder.ResetCounts();
-    leftEncoder.ResetCounts();
-}
-
 void Drivetrain::stopMotors() {
     rightMotor.Stop();
     leftMotor.Stop();
@@ -49,4 +46,10 @@ void Drivetrain::stopMotors() {
 void Drivetrain::setMotorPercent(int right, int left) {
     rightMotor.SetPercent(right);
     leftMotor.SetPercent(left);
+}
+
+// private functions
+void Drivetrain::resetCounts() {
+    rightEncoder.ResetCounts();
+    leftEncoder.ResetCounts();
 }
