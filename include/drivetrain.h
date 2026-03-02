@@ -26,6 +26,7 @@ private:
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
+    static constexpr float TRACK_WIDTH = 7.0;
 
 public:
     /**

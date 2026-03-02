@@ -22,9 +22,9 @@ void Drivetrain::driveForward(int inches, int percent) {
 }
 
 void Drivetrain::turn(float angle, Direction dir, int percent) {
-    // for some reason 6 inches worked perfectly for the crayola bot but I'll calculate this with the actual robot
-    constexpr int TURN_DIST = 6;
-    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 90.0));
+    // distance in inches to make a 360 degree turn
+    constexpr float TURN_DIST = PI * TRACK_WIDTH;
+    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
 
     resetCounts();
     setMotorPercent(dir * percent, dir * percent);
@@ -35,7 +35,7 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
 }
 
 void Drivetrain::driveInDirection(int inches, double angle, int percent) {
-    
+    // might not be necesary im not sure lowk
 }
 
 void Drivetrain::stopMotors() {
