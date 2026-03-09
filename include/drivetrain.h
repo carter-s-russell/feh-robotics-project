@@ -28,6 +28,19 @@ private:
     static constexpr float MAX_VOLTAGE = 9.0;
     static constexpr float TRACK_WIDTH = 7.0;
 
+    /**
+     * @brief Resets the pulse counts of both the right and left encoders to zero
+     */
+    void resetCounts();
+
+    /**
+     * @brief Ramps the motors up to a specified percent
+     * 
+     * @param targetRight desired final motor speed for right motor
+     * @param targetLeft  desired final motor speed for left motor
+     */
+    void rampToPercent(int targetRight, int targetLeft);
+
 public:
     /**
      * @brief Constructs a new Drivetrain object
@@ -77,12 +90,6 @@ public:
      * @param left The power percentage for the left motor (-100 to 100)
      */
     void setMotorPercent(int right, int left);
-
-private:
-    /**
-     * @brief Resets the pulse counts of both the right and left encoders to zero
-     */
-    void resetCounts();
 };
 
 #endif
