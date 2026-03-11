@@ -22,7 +22,7 @@ private:
     DigitalEncoder rightEncoder;
     DigitalEncoder leftEncoder;
 
-    static constexpr int IGUWAN_COUNTS_PER_ROTATION = 318;
+    static constexpr int IGUWAN_COUNTS_PER_ROTATION = 318 / 2; // for some reason this is doubling my distance so im halving it for now
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
