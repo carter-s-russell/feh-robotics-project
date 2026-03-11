@@ -26,7 +26,7 @@ private:
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
-    static constexpr float TRACK_WIDTH = 7.0;
+    static constexpr float TRACK_WIDTH = 8.0;
 
     /**
      * @brief Resets the pulse counts of both the right and left encoders to zero
@@ -68,15 +68,6 @@ public:
      * @param percent The motor power percentage (0 to 100)
      */
     void turn(float angle, Direction dir, int percent);
-
-    /**
-     * @brief Calculates and executes a drive path along a specific angular vector
-     * 
-     * @param inches The distance to drive in inches
-     * @param angle The target heading/angle to drive towards
-     * @param percent The motor power percentage (0 to 100)
-     */
-    void driveInDirection(int inches, double angle, int percent);
 
     /**
      * @brief Stops power to both the right and left motors

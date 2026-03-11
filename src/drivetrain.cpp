@@ -49,7 +49,7 @@ void Drivetrain::driveForward(int inches, int percent) {
 
 void Drivetrain::turn(float angle, Direction dir, int percent) {
     // distance in inches to make a 360 degree turn
-    constexpr float TURN_DIST = PI * TRACK_WIDTH;
+    constexpr float TURN_DIST = PI * (TRACK_WIDTH / 2);
     int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
 
     resetCounts();
@@ -58,10 +58,6 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
     while((leftEncoder.Counts() + rightEncoder.Counts()) / 2.0 < counts);
 
     stopMotors();
-}
-
-void Drivetrain::driveInDirection(int inches, double angle, int percent) {
-    // might not be necesary im not sure lowk
 }
 
 void Drivetrain::stopMotors() {

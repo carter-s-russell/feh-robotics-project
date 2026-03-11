@@ -12,6 +12,7 @@ Drivetrain driveChain(FEHMotor::Motor0, FEHMotor::Motor1, FEHIO::Pin8, FEHIO::Pi
 
 void ERCMain()
 {
+    /*
     Util::waitForTouch();
     driveChain.driveForward(13, -40);
     Sleep(0.5);
@@ -23,4 +24,12 @@ void ERCMain()
     driveChain.driveForward(15, -40);
     driveChain.turn(85, LEFT, 40);
     driveChain.driveForward(15, -40);
+    */
+
+    while (true) {
+        Util::waitForTouch();
+        driveChain.driveForward(6, 40);
+        Sleep(0.5);
+        driveChain.turn(180, LEFT, 40);
+    }
 }
