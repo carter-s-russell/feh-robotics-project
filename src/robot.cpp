@@ -16,31 +16,85 @@ Robot::Robot(Drivetrain& dt, FEHIO::FEHIOPin cdsPin)
 }
 
 void Robot::waitForStartLight() {
+    /* positioning */
+    // robot starts at start point so no positioning needed
 
+    /* action */
+    while(!lightInterpreter.isStartLightOn());
+    drivetrain.driveForward(2, m_MOTOR_SPEED);
+    Sleep(0.5);
+    drivetrain.driveForward(-2, m_MOTOR_SPEED);
 }
 
 void Robot::completeCompostBinTask() {
-    
+    /* positioning */
+
+    /* action */
+
 }
 
 void Robot::completeAppleBasketTask() {
-    
+    /* positioning */
+
+    /* action */
+
 }
 
 void Robot::completeFertilizerTask() {
-    
+    /* positioning */
+
+    /* action */
+
 }
 
 void Robot::completeHumidifierTask() {
+    /* positioning */
+    // bottom of ramp
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.driveForward(4, m_MOTOR_SPEED);
+    drivetrain.turn(45, LEFT, m_MOTOR_SPEED);
 
+    // up ramp and to humidifier light
+    drivetrain.driveForward(37, m_MOTOR_SPEED);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.driveForward(16, m_MOTOR_SPEED);
+
+    /* action */
+    // read light
+    Sleep(0.5);
+    Direction dir = (lightInterpreter.getHumidifierColor() == 2) ? LEFT : RIGHT;
+
+    // press button
+    drivetrain.turn(11, dir, m_MOTOR_SPEED);
+    drivetrain.driveForward(9, m_MOTOR_SPEED);
+    Sleep(0.5);
+
+    // return to light for next step
+    drivetrain.driveForward(-9, m_MOTOR_SPEED);
 }
 
 void Robot::completeWindowTask() {
-    
+    /* positioning */
+
+    /* action */
+
 }
 
 void Robot::completeFinalButtonTask() {
-    
+    /* positioning */
+    // return to bottom light
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
+    drivetrain.driveForward(16, m_MOTOR_SPEED);
+    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
+    drivetrain.driveForward(37, m_MOTOR_SPEED);
+    drivetrain.turn(45, RIGHT, m_MOTOR_SPEED);
+    drivetrain.driveForward(4, m_MOTOR_SPEED);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+
+    /* action */
+    // drive forward to press button
+    drivetrain.driveForward(2, m_MOTOR_SPEED);
+
 }
 
 void Robot::testRobot() {

@@ -25,6 +25,9 @@ public:
     // constructor with drivetrain instead of individual motors and encoders
     Robot(Drivetrain& dt, FEHIO::FEHIOPin cdsPin);
 
+    // member variable so I can change it in main if needed
+    int m_MOTOR_SPEED = 40;
+
     void waitForStartLight();
     void completeCompostBinTask();
     void completeAppleBasketTask();

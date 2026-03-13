@@ -55,10 +55,10 @@ public:
 
     /**
      * @brief Drives the robot forward a specified distance
-     * * @param inches The distance to drive forward in inches
+     * @param inches The distance to drive forward in inches
      * @param percent The motor power percentage (0 to 100)
      */
-    void driveForward(int inches, int percent);
+    void driveForward(double inches, int percent);
 
     /**
      * @brief Turns the robot a specified angle in a given direction
