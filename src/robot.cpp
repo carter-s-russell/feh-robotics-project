@@ -21,9 +21,9 @@ void Robot::waitForStartLight() {
 
     /* action */
     while(!lightInterpreter.isStartLightOn());
-    drivetrain.driveForward(2, m_MOTOR_SPEED);
+    drivetrain.driveForward(1, m_MOTOR_SPEED);
     Sleep(0.5);
-    drivetrain.driveForward(-2, m_MOTOR_SPEED);
+    drivetrain.driveForward(-1, m_MOTOR_SPEED);
 }
 
 void Robot::completeCompostBinTask() {
@@ -50,7 +50,7 @@ void Robot::completeFertilizerTask() {
 void Robot::completeHumidifierTask() {
     /* positioning */
     // bottom of ramp
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.turn(270, RIGHT, m_MOTOR_SPEED);
     drivetrain.driveForward(4, m_MOTOR_SPEED);
     drivetrain.turn(45, LEFT, m_MOTOR_SPEED);
 
@@ -66,11 +66,11 @@ void Robot::completeHumidifierTask() {
 
     // press button
     drivetrain.turn(11, dir, m_MOTOR_SPEED);
-    drivetrain.driveForward(9, m_MOTOR_SPEED);
+    drivetrain.driveForward(5.5, m_MOTOR_SPEED);
     Sleep(0.5);
 
     // return to light for next step
-    drivetrain.driveForward(-9, m_MOTOR_SPEED);
+    drivetrain.driveForward(-5.5, m_MOTOR_SPEED);
 }
 
 void Robot::completeWindowTask() {
@@ -93,7 +93,7 @@ void Robot::completeFinalButtonTask() {
 
     /* action */
     // drive forward to press button
-    drivetrain.driveForward(2, m_MOTOR_SPEED);
+    drivetrain.driveForward(1, m_MOTOR_SPEED);
 
 }
 

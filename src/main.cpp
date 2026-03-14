@@ -6,7 +6,10 @@ Drivetrain drivetrain(FEHMotor::Motor0, FEHMotor::Motor1, FEHIO::Pin8, FEHIO::Pi
 Robot robot(drivetrain, FEHIO::Pin0);
 
 void initiateRun() {
-    robot.waitForStartLight();
+    //robot.waitForStartLight();
+    //Sleep(1.0);
+    //LCD.Clear();
+    LCD.WriteLine("Starting");
     robot.completeHumidifierTask();
     robot.completeFinalButtonTask();
 }

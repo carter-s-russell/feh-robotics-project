@@ -40,13 +40,22 @@ void Drivetrain::driveForward(double inches, int percent) {
     int counts = ceil(inches * COUNTS_PER_INCH);
     resetCounts();
     
-    rampToPercent(-1 * percent, percent);
+    if (inches > 3) {
+        rampToPercent(-1 * percent, percent);
+    } else {
+        percent = 20; 
+        setMotorPercent(-percent, percent);
+    }
 
     // constants for tuning the control loop
     constexpr float Kp_decel = 0.5;
     constexpr int MIN_POWER = 15;
-    constexpr float DECEL_THRESHOLD = 150.0;
     constexpr float Kp_straight = 1.0;
+    
+    float DECEL_THRESHOLD = 150.0;
+    if (counts / 2.0 < 150.0) {
+        DECEL_THRESHOLD = counts / 2.0;
+    }
 
     float currentAvgCounts = 0.0;
 
@@ -83,12 +92,20 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
     int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
     resetCounts();
 
-    rampToPercent(dir * percent, dir * percent);
+    if (angle > 15.0) {
+        rampToPercent(dir * percent, dir * percent);
+    } else {
+        percent = 20; 
+        setMotorPercent(dir * percent, dir * percent);
+    }
 
     // constants for tuning the control loop
     constexpr float Kp_decel = 0.5; 
     constexpr int MIN_POWER = 15; 
-    constexpr float DECEL_THRESHOLD = 150.0; 
+    float DECEL_THRESHOLD = 150.0; 
+    if (counts / 2.0 < 150.0) {
+        DECEL_THRESHOLD = counts / 2.0;
+    }
 
     float currentAvgCounts = 0.0;
 

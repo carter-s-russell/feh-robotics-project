@@ -2,6 +2,8 @@
 #define LIGHT_INTERPRETER_H
 
 #include <FEHIO.h>
+#include <FEHLCD.h>
+#include <FEHUtility.h>
 
 class LightInterpreter {
 private:
