@@ -21,9 +21,9 @@ void Robot::waitForStartLight() {
 
     /* action */
     while(!lightInterpreter.isStartLightOn());
-    drivetrain.driveForward(1, m_MOTOR_SPEED);
+    drivetrain.drive(1, m_MOTOR_SPEED);
     Sleep(0.5);
-    drivetrain.driveForward(-1, m_MOTOR_SPEED);
+    drivetrain.drive(-1, m_MOTOR_SPEED);
 }
 
 void Robot::completeCompostBinTask() {
@@ -50,27 +50,35 @@ void Robot::completeFertilizerTask() {
 void Robot::completeHumidifierTask() {
     /* positioning */
     // bottom of ramp
-    drivetrain.turn(270, RIGHT, m_MOTOR_SPEED);
-    drivetrain.driveForward(4, m_MOTOR_SPEED);
+    drivetrain.drive(-2, m_MOTOR_SPEED);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(8, m_MOTOR_SPEED);
     drivetrain.turn(45, LEFT, m_MOTOR_SPEED);
 
     // up ramp and to humidifier light
-    drivetrain.driveForward(37, m_MOTOR_SPEED);
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
-    drivetrain.driveForward(16, m_MOTOR_SPEED);
+    drivetrain.drive(25, m_MOTOR_SPEED);
+    // move 4 in forward and 5 in left while avoiding table
+    constexpr float angle = 51.34;
+    drivetrain.turn(angle, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(6.4, m_MOTOR_SPEED);
+
+    drivetrain.turn(90 - angle, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(7, m_MOTOR_SPEED);
 
     /* action */
     // read light
     Sleep(0.5);
     Direction dir = (lightInterpreter.getHumidifierColor() == 2) ? LEFT : RIGHT;
+    dir = LEFT;
+    Sleep(1.5);
 
     // press button
-    drivetrain.turn(11, dir, m_MOTOR_SPEED);
-    drivetrain.driveForward(5.5, m_MOTOR_SPEED);
-    Sleep(0.5);
+    drivetrain.turn(11, dir, m_MOTOR_SPEED/2);
+    drivetrain.drive(5.5, m_MOTOR_SPEED/2);
+    Sleep(2.5);
 
     // return to light for next step
-    drivetrain.driveForward(-5.5, m_MOTOR_SPEED);
+    drivetrain.drive(-5.5, m_MOTOR_SPEED/2);
 }
 
 void Robot::completeWindowTask() {
@@ -84,32 +92,27 @@ void Robot::completeFinalButtonTask() {
     /* positioning */
     // return to bottom light
     drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
-    drivetrain.driveForward(16, m_MOTOR_SPEED);
+    drivetrain.drive(16, m_MOTOR_SPEED);
     drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
-    drivetrain.driveForward(37, m_MOTOR_SPEED);
+    drivetrain.drive(37, m_MOTOR_SPEED);
     drivetrain.turn(45, RIGHT, m_MOTOR_SPEED);
-    drivetrain.driveForward(4, m_MOTOR_SPEED);
+    drivetrain.drive(4, m_MOTOR_SPEED);
     drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
 
     /* action */
     // drive forward to press button
-    drivetrain.driveForward(1, m_MOTOR_SPEED);
+    drivetrain.drive(1, m_MOTOR_SPEED);
 
 }
 
 void Robot::testRobot() {
     Util::waitForTouch();
-    drivetrain.driveForward(39, 40);
+    drivetrain.turn(90, LEFT, 40);
     Sleep(0.5);
     drivetrain.turn(90, LEFT, 40);
     Sleep(0.5);
-    drivetrain.driveForward(15, 40);
-    Util::waitForTouch();
-    drivetrain.turn(180, LEFT, 40);
+    drivetrain.turn(90, LEFT, 40);
     Sleep(0.5);
-    drivetrain.driveForward(15, 40);
+    drivetrain.turn(90, LEFT, 40);
     Sleep(0.5);
-    drivetrain.turn(90, RIGHT, 40);
-    Sleep(0.5);
-    drivetrain.driveForward(35, 40);
 }

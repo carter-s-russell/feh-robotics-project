@@ -36,15 +36,22 @@ void Drivetrain::rampToPercent(int targetRight, int targetLeft) {
 }
 
 // public functions
-void Drivetrain::driveForward(double inches, int percent) {
+void Drivetrain::drive(double inches, int percent) {
+    // test if robot is moving forward or not
+    int forward = 1;
+    if (inches < 0) {
+        inches = -1 * inches;
+        forward = -1;
+    }
+
     int counts = ceil(inches * COUNTS_PER_INCH);
     resetCounts();
     
     if (inches > 3) {
-        rampToPercent(-1 * percent, percent);
+        rampToPercent(forward * -1 * percent, forward * percent);
     } else {
-        percent = 20; 
-        setMotorPercent(-percent, percent);
+        percent = 15; 
+        setMotorPercent(forward * -1 * percent, forward * percent);
     }
 
     // constants for tuning the control loop
@@ -80,7 +87,7 @@ void Drivetrain::driveForward(double inches, int percent) {
         int encoderDiff = leftEncoder.Counts() - rightEncoder.Counts();
         int adjustment = round(encoderDiff * Kp_straight);
 
-        setMotorPercent(-(currentPower + adjustment), currentPower - adjustment);
+        setMotorPercent(forward * -(currentPower + adjustment), forward * (currentPower - adjustment));
     }
 
     stopMotors();
@@ -89,7 +96,7 @@ void Drivetrain::driveForward(double inches, int percent) {
 void Drivetrain::turn(float angle, Direction dir, int percent) {
     // distance in inches to make a 360 degree turn
     constexpr float TURN_DIST = PI * TRACK_WIDTH;
-    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
+    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * 0.98);
     resetCounts();
 
     if (angle > 15.0) {

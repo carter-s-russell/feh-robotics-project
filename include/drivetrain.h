@@ -26,7 +26,7 @@ private:
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
-    static constexpr float TRACK_WIDTH = 8.0;
+    static constexpr float TRACK_WIDTH = 8.0; //TODO: Update this
 
     /**
      * @brief Resets the pulse counts of both the right and left encoders to zero
@@ -58,7 +58,7 @@ public:
      * @param inches The distance to drive forward in inches
      * @param percent The motor power percentage (0 to 100)
      */
-    void driveForward(double inches, int percent);
+    void drive(double inches, int percent);
 
     /**
      * @brief Turns the robot a specified angle in a given direction
