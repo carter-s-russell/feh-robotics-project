@@ -26,7 +26,7 @@ private:
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
-    static constexpr float TRACK_WIDTH = 8.0; //TODO: Update this
+    static constexpr float TRACK_WIDTH = 7.75; //TODO: Update this
 
     /**
      * @brief Resets the pulse counts of both the right and left encoders to zero

@@ -96,7 +96,7 @@ void Drivetrain::drive(double inches, int percent) {
 void Drivetrain::turn(float angle, Direction dir, int percent) {
     // distance in inches to make a 360 degree turn
     constexpr float TURN_DIST = PI * TRACK_WIDTH;
-    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * 0.98);
+    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
     resetCounts();
 
     if (angle > 15.0) {

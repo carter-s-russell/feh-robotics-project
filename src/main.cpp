@@ -16,8 +16,8 @@ void initiateRun() {
 }
 
 void ERCMain() {
-    initiateRun();
-    //robot.testRobot();
+    //initiateRun();
+    robot.testRobot();
     
     /*Util::waitForTouch();
     while(true) {
