@@ -10,8 +10,7 @@ private:
     AnalogInputPin sensor;
     
     float startThreshold;
-    float redThreshold;
-    float blueThreshold;
+    float colorThreshold;
 
 public:
     LightInterpreter(FEHIO::FEHIOPin pin);

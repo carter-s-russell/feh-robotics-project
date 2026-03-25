@@ -16,10 +16,10 @@ void initiateRun() {
 }
 
 void ERCMain() {
-    //initiateRun();
-    robot.testRobot();
-    
-    /*Util::waitForTouch();
+    initiateRun();
+    //robot.testRobot();
+    /*
+    Util::waitForTouch();
     while(true) {
         LCD.WriteLine(cds.Value());
         Sleep(0.1);

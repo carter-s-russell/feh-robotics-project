@@ -2,8 +2,7 @@
 
 LightInterpreter::LightInterpreter(FEHIO::FEHIOPin pin) : sensor(pin) {
     startThreshold = 2.0;
-    redThreshold = 2.0;
-    blueThreshold = 0.8;
+    colorThreshold = 1.15;
 }
 
 bool LightInterpreter::isStartLightOn() {
@@ -17,11 +16,11 @@ int LightInterpreter::getHumidifierColor() {
     LCD.WriteLine(voltage);
     
     // Returns 1 for Red, 2 for Blue, 0 for undetected
-    if (voltage >= redThreshold) {
+    if (voltage <= colorThreshold) {
+        LCD.WriteLine("RED");
         return 1; 
-    } else if (voltage <= blueThreshold) {
+    } else {
+        LCD.WriteLine("BLUE");
         return 2; 
     }
-    
-    return 0; 
 }

@@ -26,7 +26,7 @@ private:
     static constexpr float WHEEL_RADIUS = 1.5;
     static constexpr float COUNTS_PER_INCH = IGUWAN_COUNTS_PER_ROTATION / (2 * PI * WHEEL_RADIUS);
     static constexpr float MAX_VOLTAGE = 9.0;
-    static constexpr float TRACK_WIDTH = 7.75; //TODO: Update this
+    static constexpr float TRACK_WIDTH = 7.75;
 
     /**
      * @brief Resets the pulse counts of both the right and left encoders to zero
@@ -59,6 +59,12 @@ public:
      * @param percent The motor power percentage (0 to 100)
      */
     void drive(double inches, int percent);
+
+/**
+     * @brief Drives the robot continuously until physical resistance (a wall) stops the encoders
+     * @param percent The motor power percentage (0 to 100). Note: Internally capped at 30% to prevent hardware damage.
+     */
+    void driveUntilWall(int percent);
 
     /**
      * @brief Turns the robot a specified angle in a given direction

@@ -26,7 +26,7 @@ public:
     Robot(Drivetrain& dt, FEHIO::FEHIOPin cdsPin);
 
     // member variable so I can change it in main if needed
-    int m_MOTOR_SPEED = 40;
+    int m_MOTOR_SPEED = 30;
 
     void waitForStartLight();
     void completeCompostBinTask();

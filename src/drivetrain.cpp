@@ -93,10 +93,55 @@ void Drivetrain::drive(double inches, int percent) {
     stopMotors();
 }
 
+void Drivetrain::driveUntilWall(int percent) {
+    resetCounts();
+    
+    // Safety check: Cap the power so you don't damage the robot or the course wall
+    int safePower = percent;
+    if (safePower > 20) {
+        safePower = 20; 
+    }
+
+    // Start driving
+    setMotorPercent(-safePower, safePower);
+
+    float lastAvgCounts = 0.0;
+    float lastCheckTime = TimeNow();
+    
+    constexpr float Kp_straight = 1.0;
+
+    // Infinite loop that only breaks when the wall is hit
+    while(true) {
+        float currentAvgCounts = (leftEncoder.Counts() + rightEncoder.Counts()) / 2.0;
+
+        // 1. Wall Detection: Check progress every 100ms
+        if (TimeNow() - lastCheckTime >= 0.1) {
+            // If the robot moved 1 count or less in 0.1 seconds, it is stuck
+            if (currentAvgCounts - lastAvgCounts <= 1.0) {
+                break; // Break the infinite loop!
+            }
+            // Update tracking variables for the next 0.1s window
+            lastAvgCounts = currentAvgCounts;
+            lastCheckTime = TimeNow();
+        }
+
+        // 2. Straight-line correction to ensure the robot stays perfectly straight
+        int encoderDiff = leftEncoder.Counts() - rightEncoder.Counts();
+        int adjustment = round(encoderDiff * Kp_straight);
+
+        setMotorPercent(-(safePower + adjustment), safePower - adjustment);
+    }
+
+    stopMotors();
+}
+
 void Drivetrain::turn(float angle, Direction dir, int percent) {
     // distance in inches to make a 360 degree turn
     constexpr float TURN_DIST = PI * TRACK_WIDTH;
-    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0));
+    // for some reason the robot needs this to turn accurately idk why lol prob something to do with the track width so maybe ill fix that
+    // TODO: remove this when fixed
+    constexpr float SCALAR = 1.01;
+    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * SCALAR);
     resetCounts();
 
     if (angle > 15.0) {
