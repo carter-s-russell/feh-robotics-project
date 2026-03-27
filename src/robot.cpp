@@ -83,8 +83,23 @@ void Robot::completeHumidifierTask() {
 
 void Robot::completeWindowTask() {
     /* positioning */
+    // bottom of ramp
+    drivetrain.drive(-2, m_MOTOR_SPEED);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(7.1, m_MOTOR_SPEED);
+    drivetrain.turn(45, LEFT, m_MOTOR_SPEED);
+
+    // up ramp and open window
+    drivetrain.drive(24.5, m_MOTOR_SPEED);
+    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
+    Util::waitForTouch();
+    drivetrain.drive(-20, m_MOTOR_SPEED);
 
     /* action */
+    // reposition and close window
+    drivetrain.turn(12, LEFT, m_MOTOR_SPEED/2);
+    Util::waitForTouch();
+    drivetrain.drive(20, m_MOTOR_SPEED);
 
 }
 

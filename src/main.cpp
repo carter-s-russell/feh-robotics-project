@@ -11,8 +11,9 @@ void initiateRun() {
     //Sleep(1.0);
     //LCD.Clear();
     LCD.WriteLine("Starting");
-    robot.completeHumidifierTask();
-    robot.completeFinalButtonTask();
+    robot.completeWindowTask();
+    //robot.completeHumidifierTask();
+    //robot.completeFinalButtonTask();
 }
 
 void ERCMain() {
