@@ -3,15 +3,16 @@
 
 Robot::Robot(FEHMotor::FEHMotorPort driveRightMotor, FEHMotor::FEHMotorPort driveLeftMotor, 
              FEHIO::FEHIOPin driveRightEncoder, FEHIO::FEHIOPin driveLeftEncoder,
-             FEHIO::FEHIOPin cdsPin)
+             FEHIO::FEHIOPin cdsPin, FEHMotor::FEHMotorPort liftMotor)
     : drivetrain(driveRightMotor, driveLeftMotor, driveRightEncoder, driveLeftEncoder),
-      lightInterpreter(cdsPin) 
+      lightInterpreter(cdsPin), arm(liftMotor)
 {
 }
 
-Robot::Robot(Drivetrain& dt, FEHIO::FEHIOPin cdsPin)
+Robot::Robot(Drivetrain& dt, FEHIO::FEHIOPin cdsPin, FEHMotor::FEHMotorPort liftMotor)
     : drivetrain(dt),
-      lightInterpreter(cdsPin)
+      lightInterpreter(cdsPin),
+      arm(liftMotor)
 {
 }
 
@@ -117,19 +118,7 @@ void Robot::completeFinalButtonTask() {
 }
 
 void Robot::testRobot() {
+    arm.raise();
     Util::waitForTouch();
-    drivetrain.turn(90, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(90, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(180, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(180, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(120, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(120, LEFT, 40);
-    Sleep(0.5);
-    drivetrain.turn(120, LEFT, 40);
-    Sleep(0.5);
+    arm.stop();
 }

@@ -3,5 +3,5 @@
 ## Contributors
 - Carter Russell
 - Heath Hazel
-- Kelis Ngyuen
+- Kelis Nguyen
 - Sylvia Vosicky
