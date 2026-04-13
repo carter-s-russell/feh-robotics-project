@@ -11,14 +11,14 @@ void initiateRun() {
     //Sleep(1.0);
     //LCD.Clear();
     LCD.WriteLine("Starting");
-    robot.completeWindowTask();
+    robot.completeCompostBinTask();
     //robot.completeHumidifierTask();
     //robot.completeFinalButtonTask();
 }
 
 void ERCMain() {
-    //initiateRun();
-    robot.testRobot();
+    initiateRun();
+    //robot.testRobot();
     /*
     Util::waitForTouch();
     while(true) {

@@ -29,9 +29,35 @@ void Robot::waitForStartLight() {
 
 void Robot::completeCompostBinTask() {
     /* positioning */
+    drivetrain.drive(2, m_MOTOR_SPEED/2);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(3.5, m_MOTOR_SPEED);
+    drivetrain.turn(15, RIGHT, m_MOTOR_SPEED/2);
+    drivetrain.drive(1.75, m_MOTOR_SPEED/2);
+    drivetrain.turn(30, RIGHT, m_MOTOR_SPEED/2);
+    //arm.lower();
+    //Sleep(2.0);
+    //arm.stop();
+    drivetrain.drive(2.2, m_MOTOR_SPEED/2);
 
     /* action */
+    int n = 1;
+    for (int i = 0; i < n; i++) {
+        arm.lower();
+        Sleep(2.2);
+        arm.stop();
+        drivetrain.drive(-2, m_MOTOR_SPEED/2);
+        arm.raise();
+        Sleep(2.0);
+        arm.stop();
+        drivetrain.drive(2, m_MOTOR_SPEED/2);
+    }
 
+    drivetrain.drive(-4, m_MOTOR_SPEED);
+    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
+    drivetrain.drive(2, m_MOTOR_SPEED);
+    drivetrain.turn(100, RIGHT, m_MOTOR_SPEED);
+    drivetrain.drive(4, m_MOTOR_SPEED);
 }
 
 void Robot::completeAppleBasketTask() {
@@ -119,6 +145,8 @@ void Robot::completeFinalButtonTask() {
 
 void Robot::testRobot() {
     arm.raise();
-    Util::waitForTouch();
+    Sleep(2.0);
+    arm.lower();
+    Sleep(2.0);
     arm.stop();
 }

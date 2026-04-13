@@ -9,8 +9,8 @@ class Arm {
 private:
     FEHMotor liftMotor;
 
-    static constexpr int LIFT_POWER = 30;
-    static constexpr int LOWER_POWER = 20;
+    static constexpr int LIFT_POWER = 25;
+    static constexpr int LOWER_POWER = 25;
 
 public:
     Arm(FEHMotor::FEHMotorPort motorPort); 
