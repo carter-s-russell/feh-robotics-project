@@ -12,6 +12,7 @@ void initiateRun() {
     //LCD.Clear();
     LCD.WriteLine("Starting");
     robot.completeCompostBinTask();
+    robot.completeAppleBasketTask();
     //robot.completeHumidifierTask();
     //robot.completeFinalButtonTask();
 }
@@ -19,12 +20,4 @@ void initiateRun() {
 void ERCMain() {
     initiateRun();
     //robot.testRobot();
-    /*
-    Util::waitForTouch();
-    while(true) {
-        LCD.WriteLine(cds.Value());
-        Sleep(0.1);
-        LCD.Clear();
-    }
-    */
 }

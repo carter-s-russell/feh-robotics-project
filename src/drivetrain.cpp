@@ -140,7 +140,7 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
     constexpr float TURN_DIST = PI * TRACK_WIDTH;
     // for some reason the robot needs this to turn accurately idk why lol prob something to do with the track width so maybe ill fix that
     // TODO: remove this when fixed
-    constexpr float SCALAR = 1.01;
+    constexpr float SCALAR = 1.025;
     int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * SCALAR);
     resetCounts();
 
@@ -188,6 +188,7 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
 void Drivetrain::stopMotors() {
     rightMotor.Stop();
     leftMotor.Stop();
+    Sleep(0.25);
 }
 
 void Drivetrain::setMotorPercent(int right, int left) {
