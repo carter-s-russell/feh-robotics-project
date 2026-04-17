@@ -76,6 +76,14 @@ public:
     void turn(float angle, Direction dir, int percent);
 
     /**
+     * @brief Executes a pivot turn by locking the inner wheel and driving the outer wheel to swing the robot in an arc. Useful for aligning against walls without rear chassis swing.
+     * @param angle The target rotation angle in degrees
+     * @param dir The direction of the turn (LEFT or RIGHT)
+     * @param percent The motor power percentage (0 to 100)
+     */
+    void pivotTurn(float angle, Direction dir, int percent);
+
+    /**
      * @brief Stops power to both the right and left motors
      */
     void stopMotors();

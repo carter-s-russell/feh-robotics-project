@@ -8,7 +8,7 @@ LightInterpreter::LightInterpreter(FEHIO::FEHIOPin pin) : sensor(pin) {
 bool LightInterpreter::isStartLightOn() {
     LCD.WriteLine(sensor.Value());
     Sleep(0.1);
-    return sensor.Value() > startThreshold;
+    return sensor.Value() < startThreshold;
 }
 
 int LightInterpreter::getHumidifierColor() {

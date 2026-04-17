@@ -22,35 +22,37 @@ void Robot::waitForStartLight() {
 
     /* action */
     while(!lightInterpreter.isStartLightOn());
-    drivetrain.drive(1, m_MOTOR_SPEED);
-    Sleep(0.5);
     drivetrain.drive(-1, m_MOTOR_SPEED);
+    arm.lower(1.9);
+    drivetrain.driveUntilWall(m_MOTOR_SPEED);
+    drivetrain.drive(-1, m_MOTOR_SPEED);
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
+    drivetrain.drive(-5, m_MOTOR_SPEED);
+    arm.raise(2.0);
 }
 
 void Robot::completeCompostBinTask() {
     /* positioning */
     drivetrain.drive(2, m_MOTOR_SPEED/2);
     drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
-    drivetrain.drive(3.5, m_MOTOR_SPEED);
+    drivetrain.drive(3.75, m_MOTOR_SPEED);
     drivetrain.turn(20, RIGHT, m_MOTOR_SPEED/2);
     drivetrain.drive(1.75, m_MOTOR_SPEED/2);
     drivetrain.turn(25, RIGHT, m_MOTOR_SPEED/2);
+    drivetrain.drive(-1.5, m_MOTOR_SPEED/2);
+    drivetrain.turn(20, LEFT, m_MOTOR_SPEED/2);
+    drivetrain.drive(1.4, m_MOTOR_SPEED/2);
+    drivetrain.turn(20, RIGHT, m_MOTOR_SPEED/2);
 
     /* action */
     Sleep(1.0);
-    /*
     int n = 1;
     for (int i = 0; i < n; i++) {
         drivetrain.drive(2, m_MOTOR_SPEED/2);
-        arm.raise();
-        Sleep(1.8);
-        arm.stop();
+        arm.lower(1.9);
         drivetrain.drive(-2, m_MOTOR_SPEED/2);
-        arm.lower();
-        Sleep(1.8);
-        arm.stop();
+        arm.raise(2.0);
     }
-    */
 }
 
 void Robot::completeAppleBasketTask() {
@@ -63,6 +65,10 @@ void Robot::completeAppleBasketTask() {
     drivetrain.turn(45, LEFT, m_MOTOR_SPEED);
 
     /* action (pick up) */
+    arm.lower(0.95);
+    drivetrain.drive(4, m_MOTOR_SPEED/2);
+    drivetrain.drive(-4, m_MOTOR_SPEED/2);
+    arm.lower(0.95);
     Sleep(1.0);
 
     /* positioning (drop off) */
@@ -72,6 +78,13 @@ void Robot::completeAppleBasketTask() {
     drivetrain.drive(-10, m_MOTOR_SPEED);
     drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
     drivetrain.drive(30, m_MOTOR_SPEED);
+    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.drive(10, m_MOTOR_SPEED);
+    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
+    arm.raise(2.0);
+    drivetrain.drive(20, m_MOTOR_SPEED);
+    arm.lower(1.9);
+
 }
 
 void Robot::completeFertilizerTask() {
@@ -150,20 +163,8 @@ void Robot::completeFinalButtonTask() {
 }
 
 void Robot::testRobot() {
-//    drivetrain.drive(4, m_MOTOR_SPEED);
-    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
- //   drivetrain.drive(2, m_MOTOR_SPEED);
-    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
-  //  drivetrain.drive(4, m_MOTOR_SPEED);
-    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
-   // drivetrain.drive(2, m_MOTOR_SPEED);
-    drivetrain.turn(90, RIGHT, m_MOTOR_SPEED);
-//    drivetrain.drive(4, m_MOTOR_SPEED);
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
- //   drivetrain.drive(2, m_MOTOR_SPEED);
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
-  //  drivetrain.drive(4, m_MOTOR_SPEED);
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
-   // drivetrain.drive(2, m_MOTOR_SPEED);
-    drivetrain.turn(90, LEFT, m_MOTOR_SPEED);
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
+    drivetrain.turn(180, RIGHT, m_MOTOR_SPEED);
 }

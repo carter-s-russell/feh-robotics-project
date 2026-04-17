@@ -140,7 +140,7 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
     constexpr float TURN_DIST = PI * TRACK_WIDTH;
     // for some reason the robot needs this to turn accurately idk why lol prob something to do with the track width so maybe ill fix that
     // TODO: remove this when fixed
-    constexpr float SCALAR = 1.025;
+    constexpr float SCALAR = 1.0175;
     int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * SCALAR);
     resetCounts();
 
@@ -180,6 +180,55 @@ void Drivetrain::turn(float angle, Direction dir, int percent) {
         }
 
         setMotorPercent(dir * currentPower, dir * currentPower);
+    }
+
+    stopMotors();
+}
+
+void Drivetrain::pivotTurn(float angle, Direction dir, int percent) {
+    constexpr float TURN_DIST = 2.0 * PI * TRACK_WIDTH;
+    constexpr float SCRUB_FACTOR = 0.95; 
+    int counts = ceil(TURN_DIST * COUNTS_PER_INCH * (angle / 360.0) * SCRUB_FACTOR);
+
+    resetCounts();
+
+    constexpr float Kp_decel = 0.5;
+    constexpr int MIN_POWER = 15;
+
+    float dynamic_threshold = 150.0;
+    if (counts / 2.0 < 150.0) {
+        dynamic_threshold = counts / 2.0;
+    }
+
+    float currentCounts = 0.0;
+
+    while(currentCounts < counts) {
+        // Novel situation: The center of rotation has shifted to the stationary wheel, so we only track the encoder of the outer driving wheel.
+        if (dir == LEFT) {
+            currentCounts = rightEncoder.Counts();
+        } else {
+            currentCounts = leftEncoder.Counts();
+        }
+
+        float error = counts - currentCounts;
+        int currentPower = percent;
+
+        if (error < dynamic_threshold) {
+            currentPower = round(error * Kp_decel);
+
+            if (currentPower > percent) {
+                currentPower = percent;
+            }
+            if (currentPower < MIN_POWER) {
+                currentPower = MIN_POWER;
+            }
+        }
+
+        if (dir == LEFT) {
+            setMotorPercent(0, currentPower);
+        } else {
+            setMotorPercent(currentPower, 0);
+        }
     }
 
     stopMotors();
